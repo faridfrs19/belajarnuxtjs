@@ -7,6 +7,16 @@ export interface Products {
     color?: string,
     isCart?: boolean,
     description?: string,
-    quantity?: number, 
+    quantity?: number,
 }
-   
+
+export interface FormField {
+    id?: string;
+    name?: string;
+    label?: string;
+    type?: string;
+    value?: string | object;
+    placeholder?: string;
+    checked?: boolean;
+    required?: boolean;
+}
