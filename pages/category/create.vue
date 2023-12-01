@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="container">
-            <FormsCategoryForm />
+            <FormsCategoryForm/>
         </div>
     </section>
 </template>

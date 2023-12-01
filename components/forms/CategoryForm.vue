@@ -28,9 +28,15 @@ const submitCategory = async () => {
 <template>
     <section class="flex justify-center py-10">
         <div class="w-[500px]">
-            <h1 class="text-2xl mb-7 font-medium">Create Category</h1>
+            <NuxtLink to="/product"
+                class="bg-white border border-slate-300  hover:bg-blue-800  hover:text-white w-max flex items-center gap-1 py-2 px-5 rounded-full mb-7 cursor-pointer">
+                <i class="ri-arrow-left-s-line text-base font-medium"></i>
+                <span class="text-base font-medium">Kembali</span>
+            </NuxtLink>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h1 class="text-2xl mb-7 font-medium">Membuat Kategori:</h1>
             <div v-if="isShowAlert" class="p-4 mb-4 text-sm rounded-lg bg-green-100 text-green-800">
-                {{ 'Data berhasil di tambahkan' }}
+                {{ 'BERHASIL' }}
             </div>
             <form @submit.prevent="submitCategory">
                 <div class="mb-6">
@@ -40,10 +46,12 @@ const submitCategory = async () => {
                         placeholder="Enter Category Name" required />
                 </div>
                 <button type="submit"
-                    class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                    Submit
+                    class="text-white bg-blue-300 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                    Kirim
                 </button>
             </form>
+            </div>
         </div>
     </section>
 </template>
+

@@ -1,32 +1,15 @@
-<!-- pages/index.vue -->
 <template>
   <div>
     <div class="main-content">
       <section class="hero">
-        <h1 class="title">Selamat datang, Guys!</h1>
-        <p class="subtitle">Temukan keuntungan belanja dengan kami</p>
-      </section>
-
-      <section class="features">
-        <div class="feature">
-          <h2 class="feature-title">Belanja Cepat</h2>
-          <p class="feature-description">
-            Temukan produk dengan cepat dan santai.
-          </p>
-        </div>
-
-        <div class="feature">
-          <h2 class="feature-title">Harga Terjangkau</h2>
-          <p class="feature-description">
-            Kualitas tinggi dengan harga yang ramah di kantong.
-          </p>
-        </div>
-
-        <div class="feature">
-          <h2 class="feature-title">Produk Lengkap</h2>
-          <p class="feature-description">
-            Pilih dari berbagai produk lengkap berkualitas.
-          </p>
+        <div class="hero-background"></div>
+        <div class="hero-content">
+          <h1 class="title">SELAMAT DATANG DI KOPERASI SEKOLAH</h1>
+          <p class="subtitle">Melayani Kebutuhan Anda dengan Layanan Terbaik</p>
+          <div class="shop-container">
+            <img class="shop" src="../public/images/shop.png" alt="">
+          </div>
+          <NuxtLink to="/product" class="buton text-base bg-blue-600 px-4 py-2 text-white rounded-lg hover:bg-blue-600/80">Selengkapnya</NuxtLink>
         </div>
       </section>
     </div>
@@ -34,58 +17,109 @@
 </template>
 
 <style scoped>
-.main-content {
-  background-color: #f9f9f9;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.title,
+.subtitle {
+  font-family: 'Poppins', sans-serif;
+  margin: 10px;
+}
+
+.buton{
+  margin-top: 20px; /* Sesuaikan dengan tinggi margin yang diinginkan */
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background-color: #3490dc;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.buton:hover{
+  background-color: blue;
+}
+
+.shop-container {
   width: 100%;
+  text-align: center;
+}
+
+.shop {
+  width: 35%;
+  display: inline-block;
+  margin-top: 20px; /* Sesuaikan dengan tinggi margin yang diinginkan */
+}
+
+/* Responsivitas Tablet (ukuran lebar antara 600px dan 1023px) */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .shop {
+    width: 50%; /* Sesuaikan lebar gambar shop untuk tablet */
+  }
+}
+
+/* Responsivitas Mobile (ukuran lebar kurang dari 600px) */
+@media (max-width: 599px) {
+  .shop {
+    width: 100%; /* Sesuaikan lebar gambar shop untuk perangkat mobile */
+  }
+}
+
+.main-content {
+  background-image: url(../public/images/sknc.jpg);
+  background-size: cover;
   margin: 0 auto;
-  padding: 80px 15px;
+  padding: 50px 50px;
+  position: relative;
 }
 
 .hero {
+  position: relative;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.hero-content {
+  color: white;
+  padding: 20px;
 }
 
 .title {
-  font-size: 3rem;
-  color: #333;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 10px;
+  animation: fadeInUp 1s ease;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  color: #555;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  animation: fadeInUp 1.5s ease;
 }
 
-.features {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.feature {
-  flex: 1;
-  text-align: center;
-  padding: 20px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  margin: 0 10px 20px;
-  background-color: white;
-  transition: transform 0.3s;
-}
-
-.feature:hover {
-  transform: scale(1.05);
-}
-
-.feature-title {
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.feature-description {
-  font-size: 1.2rem;
-  color: #666;
+/* Animasi CSS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

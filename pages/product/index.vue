@@ -3,6 +3,10 @@ import { useCategoryStore } from '~/stores/category';
 import { useProductsStore } from '~/stores/products';
 import { ref, onMounted } from 'vue';
 
+definePageMeta({
+    middleware: ["user-access"]
+});
+
 const categoryStore = useCategoryStore();
 const productStore = useProductsStore();
 const allProducts = ref([]);
@@ -30,7 +34,7 @@ watch(selectedCategory, (newCategory) => {
     <section>
         <div class="container">
             <div class="py-10">
-                <div class="mb-6 flex justify-end gap-6">
+                <div class="mb-6 flex justify-end gap-6" style="margin-right: 10px; margin-left: 10px;">
                     <NuxtLink to="/category/create"
                         class="bg-orange-500 text-white flex justify-center items-center px-3 rounded-lg">
                         Create Category
@@ -42,9 +46,16 @@ watch(selectedCategory, (newCategory) => {
                     <!-- Dropdown now uses categories from the categoryStore -->
                     <Dropdown :categories="categoryStore.categories" @selected-category="selectedCategory = $event" />
                 </div>
-                <div class="flex gap-6 flex-wrap mx-auto">
+                <div class="flex gap-6 flex-wrap mx-auto" style="margin-left: 20px;margin-right: 10px;">
                     <template v-for="(item, index) in allProducts" :key="index">
-                        <CardsCardProduct :product="item" class="w-[calc(100%/4-18px)]" />
+                        <CardsCardProduct :product="item" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5" />
+                        <!-- 
+                            w-full: Untuk layar kecil
+                            sm:w-1/2: Setengah lebar untuk layar kecil dan di atasnya
+                            md:w-1/3: Sepertiga lebar untuk layar sedang dan di atasnya
+                            lg:w-1/4: Seperempat lebar untuk layar besar dan di atasnya
+                            xl:w-1/5: Seperlima lebar untuk layar sangat besar
+                        -->
                     </template>
                 </div>
             </div>

@@ -2,11 +2,15 @@
 import type { Products } from '~/types/products';
 import { ref, computed, onMounted } from 'vue';
 
+definePageMeta({
+  middleware: ["user-access"]
+});
+
 const products = ref<Products[]>([]);
 const totalPrice = computed(() => {
   return products.value
     .filter((product) => product.price !== undefined)
-    .reduce((accumulator, currentValue) => accumulator + currentValue.price!, 0);
+    .reduce((accumulator, currentValue) => accumulator + (currentValue.price || 0), 0);
 });
 
 const removeCart = (id: number) => {
@@ -24,11 +28,11 @@ onMounted(() => {
 
 <template>
   <section>
-    <div class="container">
-      <div class="py-10 flex gap-6">
-        <div class="w-[70%]">
+    <div class="container mx-auto px-4 py-10">
+      <div class="flex flex-col md:flex-row md:justify-between gap-6">
+        <div class="w-full md:w-[70%]">
           <div class="flex justify-between items-center pb-7 border-b border-gray-300 mb-6">
-            <h1 class="text-3xl font-medium">Shopping Cart</h1>
+            <h1 class="text-3xl font-medium">Pesanan anda:</h1>
             <p class="text-3xl font-medium">{{ products.length }} Items</p>
           </div>
           <div v-if="products.length > 0" class="flex flex-col gap-6">
@@ -38,11 +42,11 @@ onMounted(() => {
             </template>
           </div>
           <div v-else>
-            <h5 class="text-xl font-light text-center">Cart is empty</h5>
+            <h5 class="text-xl font-light text-center">kosong</h5>
           </div>
         </div>
-        <div class="w-[30%] bg-white shadow-xl h-max p-6">
-          <h3 class="text-xl font-medium mb-6">Order Summary</h3>
+        <div class="w-full md:w-[30%] bg-white shadow-xl p-6">
+          <h3 class="text-xl font-medium mb-6">Ringkasan Pesanan:</h3>
           <div class="flex flex-col gap-3 border-b border-gray-300 pb-4">
             <div v-if="products.length > 0">
               <div v-for="(item, index) in products" :key="index" class="flex gap-4 items-center">
@@ -51,16 +55,42 @@ onMounted(() => {
               </div>
             </div>
             <div v-else>
-              <p class="text-sm text-center font-light">There are no orders yet</p>
+              <p class="text-sm text-center font-light">Belum ada pesanan</p>
             </div>
           </div>
           <div class="pt-4 flex items-center justify-between mb-6">
             <span class="text-base">Total</span>
             <span class="text-base font-bold">${{ totalPrice }}</span>
           </div>
-          <button class="bg-blue-600 text-white text-base font-bold w-full py-2 rounded-lg">Checkout</button>
+          <button class="bg-blue-600 text-white text-base font-bold w-full py-2 rounded-lg">Bayar</button>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.text-limit {
+  max-width: 150px; /* Ganti dengan lebar yang sesuai */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tambahkan gaya responsif di bawah ini */
+@media (max-width: 767px) {
+  .md\:w-\[70\%\] {
+    width: 100%;
+  }
+
+  .md\:w-\[30\%\] {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+</style>
